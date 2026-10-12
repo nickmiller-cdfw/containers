@@ -11,4 +11,3 @@ pipx install ngs-smap
 
 %environment
 export PATH=$PATH:/root/.local/bin
-#
