@@ -1,0 +1,38 @@
+name: Build and publish smap container
+
+on:
+  push:
+    paths:
+      -  smap.def
+
+jobs:
+  build-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install apptainer
+        run: |
+          sudo apt update
+          sudo apt install -y wget
+          cd /tmp
+          wget https://github.com/apptainer/apptainer/releases/download/v1.5.4/apptainer_1.5.4_amd64.deb
+          sudo apt install -y ./apptainer_1.5.4_amd64.deb
+
+      - name: Build SIF Image
+        run: |
+          apptainer build smap.sif smap.def
+
+      - name: Log in to GHCR
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | apptainer remote login -u ${{ github.actor }} --password-stdin oras://ghcr.io
+
+      - name: Push Container to GHCR
+        run: |
+          IMAGE_TAG=ghcr.io/${{ github.actor }}/smap:latest
+          apptainer push basespace.sif oras://$IMAGE_TAG
