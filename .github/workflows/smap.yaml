@@ -39,4 +39,4 @@ jobs:
       - name: Push Container to GHCR
         run: |
           IMAGE_TAG=ghcr.io/${{ github.actor }}/smap:latest
-          apptainer push basespace.sif oras://$IMAGE_TAG
+          apptainer push smap.sif oras://$IMAGE_TAG
