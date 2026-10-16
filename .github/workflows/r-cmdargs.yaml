@@ -39,4 +39,4 @@ jobs:
       - name: Push Container to GHCR
         run: |
           IMAGE_TAG=ghcr.io/${{ github.actor }}/r-cmdargs:latest
-          apptainer push cmdargs.sif oras://$IMAGE_TAG
+          apptainer push r-cmdargs.sif oras://$IMAGE_TAG
