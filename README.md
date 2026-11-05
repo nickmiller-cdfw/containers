@@ -11,3 +11,7 @@ smap package for read-backed haplotype calling
 ## r-cmdargs.def
 
 R environment with tidyverse and r-commandargs packages installed.
+
+## macs3.def
+
+MACS 3 for peak calling from aligned reads.
