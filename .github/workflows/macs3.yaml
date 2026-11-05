@@ -24,6 +24,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y wget
+	  sudo apt install -y libfuse3-3
+	  sudo apt install -y libsubid4 
           cd /tmp
           wget https://github.com/apptainer/apptainer/releases/download/v1.5.4/apptainer_1.5.4_amd64.deb
           sudo apt install -y ./apptainer_1.5.4_amd64.deb
